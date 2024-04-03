@@ -14,7 +14,6 @@
         </div>
         <hr style="height:2px; width:80%; border-width:0; color:black; background-color:black" />
         <div class="col-md-6">
-
             @foreach (var item in Model)
             {
                 if (item.date < DateTime.UtcNow&&item.eventType.ToUpper()=="PUBLIC")
@@ -32,7 +31,6 @@
             }
         </div>
         <div class="col-md-6">
-
             @foreach (var item in Model)
             {
                 if (item.date >= DateTime.UtcNow&&item.eventType.ToUpper()=="PUBLIC")
