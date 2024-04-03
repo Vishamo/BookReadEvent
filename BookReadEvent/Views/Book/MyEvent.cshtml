@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model IEnumerable<EventModel>
+@using Microsoft.AspNetCore.Identity
+@using BookReadEvent.Models.AccountModel
+@inject SignInManager<ApplicationUser> signin
+@inject BookReadEvent.Repository.ICommentRepo repo
+
+
+
+<div class="container">
+    <h4 class="text-primary">
+        My Events
+    </h4>
+    <div class="row">
+
+        <div class="col-md-6 text-danger">
+            Missed Events
+        </div>
+        <div class="col-md-6 text-success">
+            Upcoming Events
+        </div>
+        <hr style="height:2px; width:80%; border-width:0; color:black; background-color:black" />
+        <div class="col-md-6">
+
+            @foreach (var item in Model)
+            {
+                if (item.date < DateTime.UtcNow && item.userId == User.Identity.Name)
+                {
+                    bool newcomment = false;
+                    foreach (var val in item.comments)
+                    {
+                        if (val.newcomment == true)
+                            newcomment = true;
+                    }
+                    if (newcomment == true)
+                    {
+                        <div class="card"  style="width: 18rem;">
+                            <div class="card-body"><span class="badge badge-primary">New Comment</span>
+                                <h5 class="card-title">@item.Title</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                                <p class="card-text">@item.description</p>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                                <a href="/Book/eventDetailByMyEvent/@item.Id" class="card-link">View Details</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                                <p class="card-text">@item.description</p>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                                <a href="/Book/eventDetailByMyEvent/@item.Id" class="card-link">View Details</a>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+
+            }
+        </div>
+        <div class="col-md-6">
+
+            @foreach (var item in Model)
+            {
+                if (item.date >= DateTime.UtcNow && item.userId == User.Identity.Name)
+                {
+                    bool newcomment = false;
+                    foreach (var val in item.comments)
+                    {
+                        if (val.newcomment == true)
+                            newcomment = true;
+                    }
+                    if (newcomment == true)
+                    {
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <span class="badge badge-primary">New Comment</span>
+                                <h5 class="card-title">@item.Title</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                                <p class="card-text">@item.description</p>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                                <a href="/Book/eventDetailByMyEvent/@item.Id" class="card-link">View Details</a>
+                                <a href="/Book/UpdateEvent/@item.Id" class="card-link">Edit</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                                <p class="card-text">@item.description</p>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                                <a href="/Book/eventDetailByMyEvent/@item.Id" class="card-link">View Details</a>
+                                <a href="/Book/UpdateEvent/@item.Id" class="card-link">Edit</a>
+                            </div>
+                        </div>
+                    }
+
+                }
+            }
+        </div>
+
+    </div>
+
+</div>

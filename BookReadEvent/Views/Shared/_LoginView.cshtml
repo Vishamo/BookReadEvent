@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BookReadEvent.Models.AccountModel
+@inject SignInManager<ApplicationUser> signin
+
+@if (signin.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="myevent">My Events</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Invitations">Invitations</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="createevent">Create Event</a>
+    </li>
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Hello @(User.FindFirst("FirstName").Value+" "+User.FindFirst("LastName").Value)
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-action="Logout" asp-controller="Account">Logout</a></li>
+    </ul>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark d-flex " asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark d-flex " asp-area="" asp-controller="Account" asp-action="signup">Register</a>
+    </li>
+}
+
+
+
+
+

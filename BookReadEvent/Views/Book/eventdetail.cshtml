@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model EventModel
+
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="display-4 text-primary">
+                    Event Detail
+                </h3>
+                <hr style="height:2px; width:80%; border-width:0; color:black; background-color:black" />
+
+                <div>
+                    <table>
+                        <tr>
+                            <td>Title: </td>
+                            <td>@Model.Title</td>
+                        </tr>
+                        <tr>
+                            <td>Date: </td>
+                            <td>@Model.date</td>
+                        </tr>
+                        <tr>
+                            <td>Location: </td>
+                            <td>@Model.location</td>
+                        </tr>
+                        <tr>
+                            <td>Event Type: </td>
+                            <td>@Model.eventType</td>
+                        </tr>
+                        <tr>
+                            <td>Start Time: </td>
+                            <td>@Model.startTime</td>
+                        </tr>
+                        <tr>
+                            <td>Duration(Hr): </td>
+                            <td>@Model.duration</td>
+                        </tr>
+                        <tr>
+                            <td>Description: </td>
+                            <td>@Model.description</td>
+                        </tr>
+                        <tr>
+                            <td>Other Details: </td>
+                            <td>@Model.otherdetails</td>
+                        </tr>
+                        @if (Model.invite != null)
+                        {
+                            var number = Model.invite.Split(",").Count();
+                            <tr>
+                                <td>Total Invited: </td>
+                                <td>@number</td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+                <div class="col-md-12" align="center">
+                    @using (Html.BeginForm("postcomment", "Comment", new { Eventid = Model.Id }))
+                    {
+                        <div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <label class="control-label" style="font-size:xx-large" for="comment">Comment</label>
+                                        <textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="comment" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <button class="btn btn-success text-uppercase" type="submit"> Post Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8PWczl8JudJLq63FGGLkJuLr3uH6_8j8pPIgW0R2MrF4zHtGJeYM1lNJYmzRRG94M9ajQTgu3w0fe6dTkiyn4DiPYfYnqQsgid16-HSmJCVHaWzyvRHwbDJQoH-6Vwx0STm4m_WDq4uM6IWeeRrJ7KA">
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <h3 class="display-4 text-danger">Previous Comments!!</h3>
+
+                <div class="container">
+                    @foreach (var i in Model.comments)
+                    {
+                    <div class="card mb-12 shadow-sm" style="width: 50%;" align="center">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    <p>@i.comment</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <small align="right" class="text-muted">@i.timestamp</small>
+                <br />
+                    }
+            </div>
+        </div>
+    </div>
+</div>

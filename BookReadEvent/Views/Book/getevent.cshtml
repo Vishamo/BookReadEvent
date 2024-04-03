@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model IEnumerable<EventModel>
+
+
+
+<div class="container">
+    <h3 class="display-4">All Events</h3>
+    <div class="row">
+       
+
+            @foreach (var item in Model)
+            {
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                    <p class="card-text">@item.description</p>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                    <a href="#" class="card-link">Card link</a>
+                </div>
+            </div>
+            }
+     
+    </div>
+</div>

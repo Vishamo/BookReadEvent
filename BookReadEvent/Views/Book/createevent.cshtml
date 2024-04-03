@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BookReadEvent.Models.AccountModel
+@model BookReadEvent.Models.EventModel
+@inject SignInManager<ApplicationUser> signin
+
+@{
+    Layout = "_Layout";
+}
+<h4 class="text-primary">CreateEvent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="createevent">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="userId" hidden class="control-label"></label>
+                <input asp-for="userId" value="@User.Identity.Name" hidden class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="date" class="control-label"></label>
+                <input asp-for="date" class="form-control" />
+                <span asp-validation-for="date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="location" class="control-label"></label>
+                <input asp-for="location" class="form-control" />
+                <span asp-validation-for="location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="startTime" class="control-label"></label>
+                <input asp-for="startTime" class="form-control" />
+                <span asp-validation-for="startTime" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label asp-for="eventType" class="control-label text-dark font-weight-bold"></label>&nbsp;
+                <input type="radio" name="eventType" value="Public" checked />&nbsp;Public&nbsp;
+                <input type="radio" name="eventType" value="Private" />&nbsp;Private&nbsp;
+                <span asp-validation-for="eventType" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="duration" class="control-label"></label>
+                <input asp-for="duration" class="form-control" />
+                <span asp-validation-for="duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="otherdetails" class="control-label"></label>
+                <input asp-for="otherdetails" class="form-control" />
+                <span asp-validation-for="otherdetails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="invite" class="control-label"></label>
+                <input asp-for="invite" class="form-control" />
+                <span asp-validation-for="invite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

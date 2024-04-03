@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+@model IEnumerable<EventModel>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 text-danger">
+            Missed Events
+        </div>
+        <div class="col-md-6 text-success">
+            Upcoming Events
+        </div>
+        <hr style="height:2px; width:80%; border-width:0; color:black; background-color:black" />
+        <div class="col-md-6">
+
+            @foreach (var item in Model)
+            {
+                if (item.date < DateTime.UtcNow&&item.eventType.ToUpper()=="PUBLIC")
+                {
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                        <p class="card-text">@item.description</p>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                        <a href="/Book/eventdetail/@item.Id" class="card-link">View Details</a>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+
+            @foreach (var item in Model)
+            {
+                if (item.date >= DateTime.UtcNow&&item.eventType.ToUpper()=="PUBLIC")
+                {
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@item.location</h6>
+                        <p class="card-text">@item.description</p>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@item.eventType  </h6>
+                        <a href="/Book/eventdetail/@item.Id" class="card-link">View Details</a>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+
+    </div>
+</div>
